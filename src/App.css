@@ -75,3 +75,517 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#eef1f6;}
 @media(max-width:600px){
   .ch-images{flex-direction:column;}
 }
+
+/* ===================== ONGLETS ADMIN (Brique 2) ===================== */
+.admin-onglets {
+  display: flex;
+  gap: 6px;
+  padding: 10px 16px 0;
+  overflow-x: auto;
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+}
+.admin-onglet {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  background: transparent;
+  color: #6b7280;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 12px 14px;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+}
+.admin-onglet.actif {
+  color: #002664;
+  border-bottom-color: #FECB00;
+}
+.admin-onglet-ic { font-size: 16px; }
+
+/* ===================== PANNEAU COURSES D'UN CHAUFFEUR ===================== */
+.ch-voir-courses {
+  width: 100%;
+  margin-top: 10px;
+  border: none;
+  background: #f3f4f6;
+  color: #002664;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.ch-courses {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.ch-courses-vide {
+  margin-top: 8px;
+  text-align: center;
+  color: #9ca3af;
+  font-size: 13px;
+  padding: 12px;
+}
+.ch-course-ligne {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f9fafb;
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.ch-course-prix { font-weight: 800; color: #0d1117; font-size: 14px; }
+.ch-course-meta { font-size: 12px; color: #6b7280; margin-top: 2px; }
+.ch-course-statut {
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+/* ===================== ONGLETS ADMIN (Brique 2) ===================== */
+.admin-onglets {
+  display: flex;
+  gap: 6px;
+  padding: 10px 16px 0;
+  overflow-x: auto;
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+}
+.admin-onglet {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  background: transparent;
+  color: #6b7280;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 12px 14px;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+}
+.admin-onglet.actif {
+  color: #002664;
+  border-bottom-color: #FECB00;
+}
+.admin-onglet-ic { font-size: 16px; }
+
+/* ===================== PANNEAU COURSES D'UN CHAUFFEUR ===================== */
+.ch-voir-courses {
+  width: 100%;
+  margin-top: 10px;
+  border: none;
+  background: #f3f4f6;
+  color: #002664;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.ch-courses {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.ch-courses-vide {
+  margin-top: 8px;
+  text-align: center;
+  color: #9ca3af;
+  font-size: 13px;
+  padding: 12px;
+}
+.ch-course-ligne {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f9fafb;
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.ch-course-prix { font-weight: 800; color: #0d1117; font-size: 14px; }
+.ch-course-meta { font-size: 12px; color: #6b7280; margin-top: 2px; }
+.ch-course-statut {
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+/* ===================== ONGLET TARIFS (Brique 3) ===================== */
+.tf-wrap {
+  padding: 16px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.tf-section {
+  background: #fff;
+  border-radius: 16px;
+  padding: 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.05);
+}
+.tf-section-titre {
+  font-size: 16px;
+  font-weight: 800;
+  color: #002664;
+  margin-bottom: 14px;
+}
+.tf-grille {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.tf-cat-titre {
+  grid-column: 1 / -1;
+  font-size: 13px;
+  font-weight: 800;
+  color: #0d1117;
+  margin-top: 6px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid #FECB00;
+}
+.tf-champ { display: flex; flex-direction: column; gap: 4px; }
+.tf-label { font-size: 12px; color: #6b7280; font-weight: 600; }
+.tf-input-zone {
+  display: flex;
+  align-items: center;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+}
+.tf-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 11px 12px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #0d1117;
+  width: 100%;
+  background: transparent;
+}
+.tf-suffixe {
+  padding: 0 12px;
+  font-weight: 800;
+  color: #6b7280;
+  font-size: 14px;
+  background: #f3f4f6;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+}
+.tf-note {
+  font-size: 12px;
+  color: #6b7280;
+  background: #f9fafb;
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-bottom: 12px;
+}
+.tf-erreur {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  text-align: center;
+}
+.tf-succes {
+  background: #dcfce7;
+  color: #166534;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  text-align: center;
+}
+.tf-enregistrer {
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  background: #002664;
+  color: #fff;
+  font-weight: 800;
+  font-size: 16px;
+  padding: 15px;
+  cursor: pointer;
+}
+.tf-enregistrer:disabled { opacity: .6; cursor: default; }
+
+@media (max-width: 480px) {
+  .tf-grille { grid-template-columns: 1fr; }
+}
+
+/* ===================== ONGLETS ADMIN (Brique 2) ===================== */
+.admin-onglets {
+  display: flex;
+  gap: 6px;
+  padding: 10px 16px 0;
+  overflow-x: auto;
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+}
+.admin-onglet {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  background: transparent;
+  color: #6b7280;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 12px 14px;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+}
+.admin-onglet.actif {
+  color: #002664;
+  border-bottom-color: #FECB00;
+}
+.admin-onglet-ic { font-size: 16px; }
+
+/* ===================== PANNEAU COURSES D'UN CHAUFFEUR ===================== */
+.ch-voir-courses {
+  width: 100%;
+  margin-top: 10px;
+  border: none;
+  background: #f3f4f6;
+  color: #002664;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.ch-courses {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.ch-courses-vide {
+  margin-top: 8px;
+  text-align: center;
+  color: #9ca3af;
+  font-size: 13px;
+  padding: 12px;
+}
+.ch-course-ligne {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f9fafb;
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.ch-course-prix { font-weight: 800; color: #0d1117; font-size: 14px; }
+.ch-course-meta { font-size: 12px; color: #6b7280; margin-top: 2px; }
+.ch-course-statut {
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+/* ===================== ONGLET TARIFS (Brique 3) ===================== */
+.tf-wrap {
+  padding: 16px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.tf-section {
+  background: #fff;
+  border-radius: 16px;
+  padding: 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.05);
+}
+.tf-section-titre {
+  font-size: 16px;
+  font-weight: 800;
+  color: #002664;
+  margin-bottom: 14px;
+}
+.tf-grille {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.tf-cat-titre {
+  grid-column: 1 / -1;
+  font-size: 13px;
+  font-weight: 800;
+  color: #0d1117;
+  margin-top: 6px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid #FECB00;
+}
+.tf-champ { display: flex; flex-direction: column; gap: 4px; }
+.tf-label { font-size: 12px; color: #6b7280; font-weight: 600; }
+.tf-input-zone {
+  display: flex;
+  align-items: center;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+}
+.tf-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 11px 12px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #0d1117;
+  width: 100%;
+  background: transparent;
+}
+.tf-suffixe {
+  padding: 0 12px;
+  font-weight: 800;
+  color: #6b7280;
+  font-size: 14px;
+  background: #f3f4f6;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+}
+.tf-note {
+  font-size: 12px;
+  color: #6b7280;
+  background: #f9fafb;
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-bottom: 12px;
+}
+.tf-erreur {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  text-align: center;
+}
+.tf-succes {
+  background: #dcfce7;
+  color: #166534;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  text-align: center;
+}
+.tf-enregistrer {
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  background: #002664;
+  color: #fff;
+  font-weight: 800;
+  font-size: 16px;
+  padding: 15px;
+  cursor: pointer;
+}
+.tf-enregistrer:disabled { opacity: .6; cursor: default; }
+
+/* ===================== ONGLET COLIS (Brique 5) ===================== */
+.colis-carte {
+  background: #fff;
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.05);
+  border-left: 4px solid #FECB00;
+}
+.colis-haut {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.colis-prix { font-weight: 800; color: #0d1117; font-size: 17px; }
+.colis-trajet { margin-bottom: 8px; }
+.colis-point {
+  font-size: 13px;
+  color: #0d1117;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 2px 0;
+}
+.colis-pin { font-size: 10px; }
+.colis-pin.dep { color: #002664; }
+.colis-pin.arr { color: #C60C30; }
+.colis-meta { font-size: 12px; color: #6b7280; margin-top: 4px; }
+
+/* ===================== ONGLET VUE D'ENSEMBLE (Brique 5) ===================== */
+.apercu-wrap {
+  padding: 16px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.apercu-section-titre {
+  font-size: 15px;
+  font-weight: 800;
+  color: #002664;
+  margin: 18px 0 10px;
+}
+.apercu-section-titre:first-child { margin-top: 0; }
+.stat-grille {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.stat-carte {
+  background: #fff;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.05);
+}
+.stat-titre { font-size: 12px; color: #6b7280; font-weight: 600; margin-bottom: 6px; }
+.stat-valeur { font-size: 24px; font-weight: 800; line-height: 1.1; }
+.stat-sous { font-size: 11px; color: #9ca3af; margin-top: 4px; }
+.apercu-repartition {
+  background: #fff;
+  border-radius: 14px;
+  padding: 16px;
+  margin-top: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.05);
+}
+.apercu-repartition-titre { font-size: 13px; font-weight: 800; color: #0d1117; margin-bottom: 10px; }
+.apercu-repartition-ligne {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #f3f4f6;
+  font-size: 14px;
+  color: #0d1117;
+}
+.apercu-repartition-ligne:last-child { border-bottom: none; }
+
+@media (max-width: 480px) {
+  .tf-grille { grid-template-columns: 1fr; }
+  .stat-grille { grid-template-columns: 1fr; }
+}
