@@ -6,6 +6,24 @@ const BUCKET = "pieces-identite";
 const NOM_CATEGORIE = { moto: "Moto", eco: "Éco", confort: "Confort", confortplus: "Confort+" };
 const PAY_NOMS = { airtel: "Airtel Money", moov: "Moov Money", cash: "Espèces" };
 
+/* ===================== LOGO MIRA EXPRESS ===================== */
+function LogoMiraExpress() {
+  return (
+    <svg className="me-logo" width="92" height="92" viewBox="0 0 92 92" xmlns="http://www.w3.org/2000/svg">
+      {/* rond bleu + contour jaune */}
+      <circle cx="46" cy="46" r="44" fill="#002664" />
+      <circle cx="46" cy="46" r="44" fill="none" stroke="#FECB00" strokeWidth="3" />
+      {/* route jaune en S */}
+      <path d="M34 70 Q22 46 50 42 Q78 38 58 14" stroke="#FECB00" strokeWidth="5"
+        fill="none" strokeLinecap="round" />
+      {/* point de départ (blanc) */}
+      <circle cx="34" cy="70" r="7" fill="#ffffff" />
+      {/* point d'arrivée (rouge) */}
+      <circle cx="58" cy="14" r="7" fill="#C60C30" />
+    </svg>
+  );
+}
+
 /* ===================== CONNEXION ADMIN ===================== */
 function Connexion() {
   const [email, setEmail] = useState("");
@@ -25,8 +43,9 @@ function Connexion() {
   return (
     <div className="admin-login">
       <div className="admin-login-carte">
-        <h1>Mira Express<br /><span>Administration</span></h1>
-        <p>Tableau de bord</p>
+        <LogoMiraExpress />
+        <h1>Mira <span>Express</span></h1>
+        <p>Administration</p>
         <input type="email" placeholder="Email admin" value={email}
           onChange={(e) => setEmail(e.target.value)} className="admin-input" />
         <input type="password" placeholder="Mot de passe" value={mdp}
