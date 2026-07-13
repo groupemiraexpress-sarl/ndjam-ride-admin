@@ -687,6 +687,8 @@ function OngletTarifs() {
       "confortplus_km", "confortplus_min", "supplement_pointe", "supplement_arret",
       "colis_petit", "colis_moyen", "colis_grand", "colis_km",
       "commission_course", "commission_colis",
+      "fid_bronze_seuil", "fid_bronze_reduction", "fid_argent_seuil", "fid_argent_reduction",
+      "fid_or_seuil", "fid_or_reduction",
     ];
     const majObj = { maj_le: new Date().toISOString() };
     for (const c of champsNum) {
@@ -752,12 +754,206 @@ function OngletTarifs() {
         </div>
       </div>
 
+      <div className="tf-section">
+        <div className="tf-section-titre">🏆 Programme de fidélité</div>
+        <div className="tf-note">
+          Réduction automatique selon le nombre de courses terminées par le client (aucun code à saisir).
+          Si le client a aussi un code promo, seule la réduction la plus avantageuse s'applique.
+        </div>
+        <div className="tf-grille">
+          <div className="tf-cat-titre">🥉 Palier Bronze</div>
+          <ChampTarif label="Dès" suffixe="courses" valeur={tarifs.fid_bronze_seuil} onChange={(v) => maj("fid_bronze_seuil", v)} />
+          <ChampTarif label="Réduction" suffixe="%" valeur={tarifs.fid_bronze_reduction} onChange={(v) => maj("fid_bronze_reduction", v)} />
+          <div className="tf-cat-titre">🥈 Palier Argent</div>
+          <ChampTarif label="Dès" suffixe="courses" valeur={tarifs.fid_argent_seuil} onChange={(v) => maj("fid_argent_seuil", v)} />
+          <ChampTarif label="Réduction" suffixe="%" valeur={tarifs.fid_argent_reduction} onChange={(v) => maj("fid_argent_reduction", v)} />
+          <div className="tf-cat-titre">🥇 Palier Or</div>
+          <ChampTarif label="Dès" suffixe="courses" valeur={tarifs.fid_or_seuil} onChange={(v) => maj("fid_or_seuil", v)} />
+          <ChampTarif label="Réduction" suffixe="%" valeur={tarifs.fid_or_reduction} onChange={(v) => maj("fid_or_reduction", v)} />
+        </div>
+      </div>
+
       {erreur && <div className="tf-erreur">{erreur}</div>}
       {message && <div className="tf-succes">{message}</div>}
 
       <button className="tf-enregistrer" onClick={enregistrer} disabled={enreg}>
         {enreg ? "Enregistrement…" : "Enregistrer les tarifs"}
       </button>
+    </div>
+  );
+}
+
+/* ===================== ONGLET PROMOTIONS (DG uniquement) ===================== */
+function OngletPromotions() {
+  const [promotions, setPromotions] = useState([]);
+  const [chargement, setChargement] = useState(true);
+  const [titre, setTitre] = useState("");
+  const [texte, setTexte] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [code, setCode] = useState("");
+  const [reductionPourcentage, setReductionPourcentage] = useState("");
+  const [reductionMontant, setReductionMontant] = useState("");
+  const [dateDebut, setDateDebut] = useState("");
+  const [dateFin, setDateFin] = useState("");
+  const [enreg, setEnreg] = useState(false);
+  const [erreur, setErreur] = useState(null);
+  const [succes, setSucces] = useState(null);
+
+  async function charger() {
+    setChargement(true);
+    const { data } = await supabase.from("promotions").select("*").order("cree_le", { ascending: false });
+    setPromotions(data || []);
+    setChargement(false);
+  }
+  useEffect(() => { charger(); }, []);
+
+  function reinitialiser() {
+    setTitre(""); setTexte(""); setImageUrl(""); setCode("");
+    setReductionPourcentage(""); setReductionMontant("");
+    setDateDebut(""); setDateFin("");
+  }
+
+  async function creer() {
+    setErreur(null); setSucces(null);
+    if (!titre.trim()) { setErreur("Le titre est obligatoire."); return; }
+    if (!dateDebut || !dateFin) { setErreur("Indiquez les dates de début et de fin."); return; }
+    if (dateFin < dateDebut) { setErreur("La date de fin doit être après la date de début."); return; }
+    setEnreg(true);
+    const { error } = await supabase.from("promotions").insert({
+      titre: titre.trim(),
+      texte: texte.trim() || null,
+      image_url: imageUrl.trim() || null,
+      code: code.trim() || null,
+      reduction_pourcentage: reductionPourcentage ? parseFloat(reductionPourcentage) : null,
+      reduction_montant: reductionMontant ? parseFloat(reductionMontant) : null,
+      date_debut: dateDebut,
+      date_fin: dateFin,
+      actif: true,
+    });
+    setEnreg(false);
+    if (error) { setErreur("Échec de l'enregistrement : " + error.message); return; }
+    setSucces("✓ Promotion créée.");
+    reinitialiser();
+    charger();
+  }
+
+  async function toggleActif(promo) {
+    await supabase.from("promotions").update({ actif: !promo.actif }).eq("id", promo.id);
+    charger();
+  }
+
+  async function supprimer(promo) {
+    if (!window.confirm(`Supprimer la promotion « ${promo.titre} » ?`)) return;
+    await supabase.from("promotions").delete().eq("id", promo.id);
+    charger();
+  }
+
+  function statutPromo(p) {
+    const aujourdhui = new Date().toISOString().slice(0, 10);
+    if (!p.actif) return { txt: "Désactivée", bg: "#f3f4f6", col: "#6b7280" };
+    if (aujourdhui < p.date_debut) return { txt: "À venir", bg: "#dbeafe", col: "#1e40af" };
+    if (aujourdhui > p.date_fin) return { txt: "Expirée", bg: "#f3f4f6", col: "#6b7280" };
+    return { txt: "Active", bg: "#dcfce7", col: "#166534" };
+  }
+
+  return (
+    <div className="tf-wrap">
+      <div className="tf-section">
+        <div className="tf-section-titre">🎁 Nouvelle promotion</div>
+
+        <label className="profil-label">Titre</label>
+        <input className="admin-input" value={titre} onChange={(e) => setTitre(e.target.value)}
+          placeholder="Ex : -20% sur votre première course" />
+
+        <label className="profil-label">Texte (optionnel)</label>
+        <textarea value={texte} onChange={(e) => setTexte(e.target.value)}
+          placeholder="Description affichée sous le titre"
+          style={{ width: "100%", border: "2px solid #e5e7eb", borderRadius: "10px", padding: "10px", fontSize: "14px", outline: "none", minHeight: "60px", marginBottom: "14px", fontFamily: "inherit" }} />
+
+        <label className="profil-label">Image (URL, optionnel)</label>
+        <input className="admin-input" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)}
+          placeholder="https://... (laissez vide pour une bannière sans image)" />
+
+        <label className="profil-label">Code promo (optionnel)</label>
+        <input className="admin-input" value={code} onChange={(e) => setCode(e.target.value.toUpperCase())}
+          placeholder="Ex : BIENVENUE20 (laissez vide si simple bannière)" />
+
+        <div style={{ display: "flex", gap: "10px" }}>
+          <div style={{ flex: 1 }}>
+            <label className="profil-label">Réduction en %</label>
+            <input type="number" className="admin-input" value={reductionPourcentage}
+              onChange={(e) => setReductionPourcentage(e.target.value)} placeholder="Ex : 20" />
+          </div>
+          <div style={{ flex: 1 }}>
+            <label className="profil-label">Ou réduction fixe (FCFA)</label>
+            <input type="number" className="admin-input" value={reductionMontant}
+              onChange={(e) => setReductionMontant(e.target.value)} placeholder="Ex : 500" />
+          </div>
+        </div>
+        <div className="tf-note">
+          Remplissez l'un des deux champs, pas forcément les deux. Laissez les deux vides pour une bannière purement informative, sans réduction de prix.
+        </div>
+
+        <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
+          <div style={{ flex: 1 }}>
+            <label className="profil-label">Date de début</label>
+            <input type="date" className="admin-input" value={dateDebut} onChange={(e) => setDateDebut(e.target.value)} />
+          </div>
+          <div style={{ flex: 1 }}>
+            <label className="profil-label">Date de fin</label>
+            <input type="date" className="admin-input" value={dateFin} onChange={(e) => setDateFin(e.target.value)} />
+          </div>
+        </div>
+
+        {erreur && <div className="tf-erreur">{erreur}</div>}
+        {succes && <div className="tf-succes">{succes}</div>}
+
+        <button className="tf-enregistrer" onClick={creer} disabled={enreg}>
+          {enreg ? "Création…" : "Créer la promotion"}
+        </button>
+      </div>
+
+      <div className="tf-section">
+        <div className="tf-section-titre">📋 Promotions ({promotions.length})</div>
+        {chargement ? (
+          <div className="admin-vide">Chargement…</div>
+        ) : promotions.length === 0 ? (
+          <div className="admin-vide">Aucune promotion créée pour le moment.</div>
+        ) : (
+          promotions.map((p) => {
+            const s = statutPromo(p);
+            return (
+              <div key={p.id} style={{ background: "#fff", borderRadius: "14px", padding: "16px", marginBottom: "12px", boxShadow: "0 2px 8px rgba(0,0,0,.06)" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "8px" }}>
+                  <div>
+                    <div style={{ fontWeight: 700, fontSize: "15px", color: "#0d1117" }}>{p.titre}</div>
+                    {p.texte && <div style={{ fontSize: "13px", color: "#6b7280", marginTop: "2px" }}>{p.texte}</div>}
+                  </div>
+                  <div style={{ padding: "4px 10px", borderRadius: "20px", fontSize: "12px", fontWeight: 700, background: s.bg, color: s.col, whiteSpace: "nowrap" }}>
+                    {s.txt}
+                  </div>
+                </div>
+                <div style={{ fontSize: "13px", color: "#374151", marginBottom: "10px" }}>
+                  {p.code && <span>Code : <b>{p.code}</b> · </span>}
+                  {p.reduction_pourcentage ? <span>-{p.reduction_pourcentage}% </span> : null}
+                  {p.reduction_montant ? <span>-{Number(p.reduction_montant).toLocaleString("fr-FR")} FCFA </span> : null}
+                  · Du {p.date_debut} au {p.date_fin}
+                </div>
+                <div style={{ display: "flex", gap: "8px" }}>
+                  <button onClick={() => toggleActif(p)}
+                    style={{ flex: 1, border: "none", borderRadius: "10px", padding: "10px", cursor: "pointer", fontWeight: 700, fontSize: "13px", background: p.actif ? "#f3f4f6" : "#16a34a", color: p.actif ? "#6b7280" : "#fff" }}>
+                    {p.actif ? "Désactiver" : "Activer"}
+                  </button>
+                  <button onClick={() => supprimer(p)}
+                    style={{ flex: 1, border: "1.5px solid #C60C30", borderRadius: "10px", padding: "10px", cursor: "pointer", fontWeight: 700, fontSize: "13px", background: "#fff", color: "#C60C30" }}>
+                    Supprimer
+                  </button>
+                </div>
+              </div>
+            );
+          })
+        )}
+      </div>
     </div>
   );
 }
@@ -957,10 +1153,17 @@ function OngletApercu() {
 }
 
 /* ===================== ONGLET ÉQUIPE (DG uniquement) ===================== */
-function OngletEquipe({ monUserId }) {
+function OngletEquipe({ monUserId, accessToken }) {
   const [admins, setAdmins] = useState([]);
   const [chargement, setChargement] = useState(true);
   const [message, setMessage] = useState(null);
+
+  const [nom, setNom] = useState("");
+  const [email, setEmail] = useState("");
+  const [role, setRole] = useState("employe");
+  const [creation, setCreation] = useState(false);
+  const [erreurCreation, setErreurCreation] = useState(null);
+  const [compteCree, setCompteCree] = useState(null); // { email, motDePasse }
 
   async function chargerAdmins() {
     setChargement(true);
@@ -985,15 +1188,70 @@ function OngletEquipe({ monUserId }) {
     setTimeout(() => setMessage(null), 3000);
   }
 
+  async function creerCompte() {
+    setErreurCreation(null); setCompteCree(null);
+    if (!nom.trim() || !email.trim()) { setErreurCreation("Nom et email requis."); return; }
+    setCreation(true);
+    try {
+      const rep = await fetch("/api/creer-employe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Authorization": "Bearer " + accessToken },
+        body: JSON.stringify({ nom: nom.trim(), email: email.trim(), role }),
+      });
+      const data = await rep.json();
+      if (!rep.ok) { setErreurCreation(data.error || "Échec de la création."); setCreation(false); return; }
+      setCompteCree(data);
+      setNom(""); setEmail(""); setRole("employe");
+      chargerAdmins();
+    } catch (e) {
+      setErreurCreation("Erreur réseau : " + e.message);
+    }
+    setCreation(false);
+  }
+
   if (chargement) return <div className="admin-vide">Chargement de l'équipe…</div>;
 
   return (
     <div className="equipe-wrap">
-      <div className="equipe-info">
-        <b>Comment ajouter un membre ?</b><br />
-        La personne crée d'abord un compte sur l'application (email + mot de passe).
-        Ensuite, ajoutez son identifiant dans la table <code>admins</code> depuis Supabase,
-        avec le rôle « employe » ou « dg ».
+      <div className="tf-section" style={{ marginBottom: "20px" }}>
+        <div className="tf-section-titre">➕ Créer un compte</div>
+
+        <label className="profil-label">Nom complet</label>
+        <input className="admin-input" value={nom} onChange={(e) => setNom(e.target.value)}
+          placeholder="Ex : Awad Idriss" />
+
+        <label className="profil-label">Email</label>
+        <input className="admin-input" type="email" value={email} onChange={(e) => setEmail(e.target.value)}
+          placeholder="email@exemple.com" />
+
+        <label className="profil-label">Rôle</label>
+        <div style={{ display: "flex", gap: "10px", marginBottom: "14px" }}>
+          <div onClick={() => setRole("employe")}
+            style={{ flex: 1, padding: "12px", borderRadius: "10px", cursor: "pointer", textAlign: "center", fontWeight: 700, fontSize: "14px", border: role === "employe" ? "2px solid #002664" : "2px solid #e5e7eb", background: role === "employe" ? "#dbeafe" : "#fff", color: "#002664" }}>
+            👤 Employé
+          </div>
+          <div onClick={() => setRole("dg")}
+            style={{ flex: 1, padding: "12px", borderRadius: "10px", cursor: "pointer", textAlign: "center", fontWeight: 700, fontSize: "14px", border: role === "dg" ? "2px solid #002664" : "2px solid #e5e7eb", background: role === "dg" ? "#dbeafe" : "#fff", color: "#002664" }}>
+            👔 Directeur
+          </div>
+        </div>
+
+        {erreurCreation && <div className="tf-erreur">{erreurCreation}</div>}
+
+        {compteCree && (
+          <div style={{ background: "#dcfce7", border: "1.5px solid #16a34a", borderRadius: "12px", padding: "14px", marginBottom: "14px" }}>
+            <div style={{ color: "#166534", fontWeight: 700, fontSize: "14px", marginBottom: "8px" }}>✓ Compte créé</div>
+            <div style={{ fontSize: "13px", color: "#166534" }}>Email : <b>{compteCree.email}</b></div>
+            <div style={{ fontSize: "13px", color: "#166534", marginBottom: "8px" }}>Mot de passe temporaire : <b>{compteCree.motDePasse}</b></div>
+            <div style={{ fontSize: "12px", color: "#166534" }}>
+              Communiquez ces identifiants à la personne. Ce mot de passe ne sera plus jamais affiché — notez-le maintenant.
+            </div>
+          </div>
+        )}
+
+        <button className="tf-enregistrer" onClick={creerCompte} disabled={creation}>
+          {creation ? "Création…" : "Créer le compte"}
+        </button>
       </div>
 
       {message && <div className="tf-succes">{message}</div>}
@@ -1314,13 +1572,14 @@ export default function App() {
   const estDG = monAdmin.role === "dg";
 
   // Suivi live et Chauffeurs/Colis : accessibles à tous.
-  // Tarifs, Vue d'ensemble et Équipe : DG uniquement.
+  // Tarifs, Promotions, Vue d'ensemble et Équipe : DG uniquement.
   const ONGLETS = [
     { id: "live", nom: "Suivi live", ic: "📡", dgSeul: false },
     { id: "chauffeurs", nom: "Chauffeurs", ic: "🚗", dgSeul: false },
     { id: "nouveau", nom: "Nouveau chauffeur", ic: "➕", dgSeul: false },
     { id: "colis", nom: "Colis", ic: "📦", dgSeul: false },
     { id: "tarifs", nom: "Tarifs", ic: "💰", dgSeul: true },
+    { id: "promotions", nom: "Promotions", ic: "🎁", dgSeul: true },
     { id: "apercu", nom: "Vue d'ensemble", ic: "📊", dgSeul: true },
     { id: "equipe", nom: "Équipe", ic: "👥", dgSeul: true },
   ].filter((o) => estDG || !o.dgSeul);
@@ -1354,8 +1613,9 @@ export default function App() {
       {ongletAutorise === "chauffeurs" && <OngletChauffeurs />}
       {ongletAutorise === "colis" && <OngletColis />}
       {ongletAutorise === "tarifs" && estDG && <OngletTarifs />}
+      {ongletAutorise === "promotions" && estDG && <OngletPromotions />}
       {ongletAutorise === "apercu" && estDG && <OngletApercu />}
-      {ongletAutorise === "equipe" && estDG && <OngletEquipe monUserId={session.user.id} />}
+      {ongletAutorise === "equipe" && estDG && <OngletEquipe monUserId={session.user.id} accessToken={session.access_token} />}
     </div>
   );
 }
