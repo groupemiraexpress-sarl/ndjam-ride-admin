@@ -589,3 +589,479 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#eef1f6;}
   .tf-grille { grid-template-columns: 1fr; }
   .stat-grille { grid-template-columns: 1fr; }
 }
+
+
+/* ===================== À AJOUTER À LA FIN DE TON App.css ADMIN ===================== */
+
+/* Logo Mira Express sur l'écran de connexion */
+.me-logo {
+  display: block;
+  margin: 0 auto 14px;
+}
+
+/* ===================== ÉCRAN ACCÈS REFUSÉ ===================== */
+.acces-refuse-ic {
+  font-size: 42px;
+  margin: 16px 0 8px;
+}
+.acces-refuse-titre {
+  font-size: 18px;
+  font-weight: 800;
+  color: #C60C30;
+  margin-bottom: 8px;
+}
+.acces-refuse-txt {
+  font-size: 13px;
+  color: #6b7280;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+.acces-refuse-mail {
+  font-size: 12px;
+  font-weight: 700;
+  color: #002664;
+  background: #f3f4f6;
+  border-radius: 8px;
+  padding: 8px;
+  margin-bottom: 16px;
+  word-break: break-all;
+}
+
+/* ===================== BADGE DE RÔLE DANS L'EN-TÊTE ===================== */
+.admin-header-droite {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.admin-role-badge {
+  font-size: 12px;
+  font-weight: 800;
+  padding: 7px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.admin-role-badge.dg {
+  background: #002664;
+  color: #FECB00;
+}
+.admin-role-badge.employe {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+/* ===================== ONGLET ÉQUIPE ===================== */
+.equipe-wrap {
+  padding: 16px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.equipe-info {
+  background: #eef3ff;
+  border-left: 4px solid #002664;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 13px;
+  color: #0d1117;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.equipe-info code {
+  background: #fff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #002664;
+  font-weight: 700;
+}
+.equipe-carte {
+  background: #fff;
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .06);
+}
+.equipe-haut {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+.equipe-nom {
+  font-size: 16px;
+  font-weight: 800;
+  color: #0d1117;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.equipe-moi {
+  font-size: 10px;
+  font-weight: 700;
+  background: #FECB00;
+  color: #002664;
+  padding: 3px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+.equipe-mail {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 3px;
+  word-break: break-all;
+}
+.equipe-role {
+  font-size: 12px;
+  font-weight: 800;
+  padding: 6px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.equipe-role.dg {
+  background: #002664;
+  color: #FECB00;
+}
+.equipe-role.employe {
+  background: #f3f4f6;
+  color: #374151;
+}
+.equipe-desactive {
+  background: #fee2e2;
+  color: #991b1b;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-top: 10px;
+  text-align: center;
+}
+.equipe-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+.equipe-btn {
+  flex: 1;
+  border: none;
+  border-radius: 10px;
+  padding: 11px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+
+/* ===================== À AJOUTER À LA FIN DE TON App.css ADMIN ===================== */
+/* (Si tu avais déjà ajouté le bloc "rôles", garde-le et ajoute celui-ci en dessous) */
+
+/* ===================== ONGLET SUIVI LIVE ===================== */
+.live-wrap {
+  padding: 16px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Bandeau de statistiques */
+.live-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.live-stat {
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px 8px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
+}
+.live-stat-val {
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1;
+}
+.live-stat-lib {
+  font-size: 11px;
+  color: #6b7280;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* Filtres */
+.live-filtres {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.live-filtre {
+  border: none;
+  background: #fff;
+  color: #6b7280;
+  padding: 9px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .08);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.live-filtre.actif {
+  background: #002664;
+  color: #fff;
+}
+
+/* Carte */
+.live-carte {
+  height: 420px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, .1);
+  margin-bottom: 10px;
+}
+.live-carte .leaflet-container {
+  height: 100%;
+  width: 100%;
+}
+
+/* Légende sous la carte */
+.live-legende {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 16px;
+  font-size: 12px;
+  color: #374151;
+  font-weight: 600;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .05);
+}
+.live-legende span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.live-legende i {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Liste des missions */
+.live-liste-titre {
+  font-size: 14px;
+  font-weight: 800;
+  color: #002664;
+  margin: 16px 0 10px;
+  padding-left: 2px;
+}
+.live-item {
+  background: #fff;
+  border-radius: 12px;
+  padding: 13px 15px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  border-left: 4px solid #002664;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .05);
+  transition: transform .1s, box-shadow .1s;
+}
+.live-item:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .1);
+}
+.live-item.sel {
+  border-left-width: 6px;
+  background: #eef3ff;
+  box-shadow: 0 0 0 2px #002664;
+}
+.live-item-haut {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.live-item-prix {
+  font-size: 17px;
+  font-weight: 800;
+  color: #0d1117;
+}
+.live-item-nom {
+  font-size: 15px;
+  font-weight: 800;
+  color: #0d1117;
+}
+.live-item-etat {
+  font-size: 11px;
+  font-weight: 800;
+  padding: 5px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.live-item-etat.route {
+  background: #dcfce7;
+  color: #16a34a;
+}
+.live-item-etat.attente {
+  background: #fef3c7;
+  color: #92400e;
+}
+.live-item-etat.dispo {
+  background: #dcfce7;
+  color: #16a34a;
+}
+.live-item-meta {
+  font-size: 12.5px;
+  color: #6b7280;
+  margin-top: 2px;
+}
+.live-item-alerte {
+  font-size: 11px;
+  font-weight: 700;
+  color: #991b1b;
+  background: #fee2e2;
+  border-radius: 6px;
+  padding: 5px 8px;
+  margin-top: 8px;
+  display: inline-block;
+}
+
+/* Horodatage de rafraîchissement */
+.live-maj {
+  text-align: center;
+  font-size: 11px;
+  color: #9ca3af;
+  margin-top: 14px;
+  font-style: italic;
+}
+
+@media (max-width: 600px) {
+  .live-stats { grid-template-columns: repeat(2, 1fr); }
+  .live-carte { height: 320px; }
+}
+
+/* ===================== ONGLET NOUVEAU CHAUFFEUR ===================== */
+.nch-wrap {
+  padding: 16px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.nch-info {
+  background: #eef3ff;
+  border-left: 4px solid #002664;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 13px;
+  color: #0d1117;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.nch-form {
+  background: #fff;
+  border-radius: 16px;
+  padding: 18px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
+}
+.nch-cats {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.nch-cat {
+  flex: 1;
+  background: #fff;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px 6px;
+  text-align: center;
+  cursor: pointer;
+  transition: all .15s;
+}
+.nch-cat.sel {
+  border-color: #16a34a;
+  background: #dcfce7;
+}
+.nch-cat-ic { font-size: 24px; }
+.nch-cat-nom { font-size: 12px; font-weight: 700; margin-top: 4px; color: #0d1117; }
+
+.nch-photo {
+  border: 2px dashed #d1d5db;
+  border-radius: 12px;
+  padding: 14px;
+  background: #fafafa;
+  margin-bottom: 12px;
+  text-align: center;
+}
+.nch-apercu {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  object-fit: contain;
+}
+.nch-vide {
+  color: #9ca3af;
+  font-size: 13px;
+  padding: 24px 0;
+}
+.nch-photo-btn {
+  width: 100%;
+  margin-top: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #002664;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 12px;
+  cursor: pointer;
+}
+.nch-photo-btn:disabled { opacity: .6; cursor: not-allowed; }
+
+.nch-liste-titre {
+  font-size: 14px;
+  font-weight: 800;
+  color: #002664;
+  margin: 20px 0 10px;
+}
+.nch-item {
+  background: #fff;
+  border-radius: 12px;
+  padding: 13px 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .05);
+  border-left: 4px solid #FECB00;
+}
+.nch-item-haut {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.nch-item-nom { font-size: 15px; font-weight: 800; color: #0d1117; }
+.nch-item-meta { font-size: 12.5px; color: #6b7280; margin-top: 2px; }
+.nch-item-etat {
+  font-size: 11px;
+  font-weight: 800;
+  padding: 5px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nch-item-etat.actif { background: #dcfce7; color: #16a34a; }
+.nch-item-etat.attente { background: #fef3c7; color: #92400e; }
+.nch-item-par {
+  font-size: 11px;
+  color: #9ca3af;
+  margin-top: 6px;
+  font-style: italic;
+}
